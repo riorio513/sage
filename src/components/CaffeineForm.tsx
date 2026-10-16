@@ -8,6 +8,13 @@ function nowForInput(): string {
   return d.toISOString().slice(0, 16);
 }
 
+// Fixed presets the user chose. Amounts are only a starting point; the fields
+// stay editable. Coffee is an estimate (12 g beans / 300 ml, about 9 mg per g).
+const PRESETS = [
+  { label: "モンエナ 355ml", drinkName: "モンスターエナジー 355ml", amountMg: 142 },
+  { label: "コーヒー 12g/300ml", drinkName: "コーヒー(豆12g・300ml)", amountMg: 110 },
+] as const;
+
 export default function CaffeineForm() {
   const [amount, setAmount] = useState("");
   const [consumedAt, setConsumedAt] = useState(nowForInput());
@@ -40,9 +47,22 @@ export default function CaffeineForm() {
     }
   }
 
+  function applyPreset(preset: (typeof PRESETS)[number]) {
+    setAmount(String(preset.amountMg));
+    setDrinkName(preset.drinkName);
+    setConsumedAt(nowForInput());
+  }
+
   return (
     <div className="sage-form">
       <h2>カフェイン</h2>
+      <div className="sage-preset-row">
+        {PRESETS.map((p) => (
+          <button key={p.label} type="button" className="sage-preset-btn" onClick={() => applyPreset(p)}>
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="sage-field">
         <label htmlFor="caffeine-amount">量 (mg) ・ 不明なら空欄のままでよい</label>
         <input

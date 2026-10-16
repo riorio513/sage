@@ -122,6 +122,7 @@ body {
 }
 
 .sage-textarea {
+  color: var(--sage-text);
   width: 100%;
   min-height: 160px;
   font-size: 17px;
@@ -139,6 +140,7 @@ body {
 }
 
 .sage-input {
+  color: var(--sage-text);
   width: 100%;
   font-size: 17px;
   padding: 12px 14px;
@@ -173,6 +175,23 @@ body {
 
 .sage-submit:disabled {
   opacity: 0.5;
+}
+
+.sage-preset-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.sage-preset-btn {
+  flex: 1;
+  padding: 14px 8px;
+  font-size: 15px;
+  color: var(--sage-text);
+  background: var(--sage-accent-light);
+  border: 1px solid var(--sage-border);
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 .sage-mood-row {
